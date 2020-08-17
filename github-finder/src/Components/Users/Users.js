@@ -1,37 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserItem from './UserItem';
+import PropTypes from 'prop-types';
 
-class Users extends Component {
-  state = {
-    users: [
-      {
-        id: Math.random() * 5,
-        login: 'JHorlamide',
-        avatar_url: 'https://avatars2.githubusercontent.com/u/52703945?v=4',
-        html_url: 'https://github.com/JHorlamide',
-      },
-      {
-        id: Math.random() * 5,
-        login: 'Mojombo',
-        avatar_url: 'https://avatars2.githubusercontent.com/u/1?v=4',
-        html_url: 'https://github.com/mojombo',
-      },
-      {
-        id: Math.random() * 5,
-        login: 'Pjhyett',
-        avatar_url: 'https://avatars2.githubusercontent.com/u/3?v=4',
-        html_url: 'https://github.com/defunkt',
-      },
-    ],
-  };
+const Users = ({ user }) => {
+  return (
+    <div style={userStyle}>
+      {user.map((user) => (
+        <UserItem key={user.id} user={user} />
+      ))}
+    </div>
+  );
+};
 
-  render() {
-    return <div>
-      {this.state.users.map(user => (
-        <UserItem key={user.id} user={user}/>
-      ))} 
-    </div>;
-  }
-}
+const userStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gridGap: '1rem',
+};
+
+Users.propType = {
+  user: PropTypes.object.isRequired,
+};
 
 export default Users;
