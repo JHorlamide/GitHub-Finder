@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
+  static propType = {
+    searchUser: PropTypes.func.isRequired,
+    clearUser: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
+  };
+
   state = {
     text: '',
   };
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.text);
+    this.props.searchUser(this.state.text);
     this.setState({ text: '' });
   };
 
   render() {
+    const { showClear, clearUser } = this.props;
     return (
       <div>
         <form className="form" onSubmit={this.handleSubmit}>
@@ -31,6 +40,11 @@ export class Search extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
+        {showClear && (
+          <button className="btn btn-light" onClick={clearUser}>
+            Clear
+          </button>
+        )}
       </div>
     );
   }
