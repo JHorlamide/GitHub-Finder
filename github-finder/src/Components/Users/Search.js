@@ -41,7 +41,7 @@ export class Search extends Component {
           />
         </form>
         {showClear && (
-          <button className="btn btn-light" onClick={clearUser}>
+          <button className="btn btn-primary" onClick={clearUser}>
             Clear
           </button>
         )}

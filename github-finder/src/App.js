@@ -36,11 +36,13 @@ class App extends Component {
     }
   };
 
+  // Clear users from state
   clearUser = () => {
     this.setState({ users: [], loading: false });
   };
 
   render() {
+    const { users, loading } = this.state;
     return (
       <div className="App">
         <Navbar />
@@ -48,12 +50,12 @@ class App extends Component {
           <Search
             searchUser={this.searchUser}
             clearUser={this.clearUser}
-            showClear={this.state.users > 0 ? true : false}
+            showClear={users.length > 0 ? true : false}
           />
           <Users
             key={this.state.users.id}
-            user={this.state.users}
-            loading={this.state.loading}
+            user={users}
+            loading={loading}
           />
         </div>
       </div>
